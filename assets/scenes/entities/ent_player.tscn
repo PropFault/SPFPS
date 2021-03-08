@@ -11,12 +11,12 @@
 [ext_resource path="res://assets/scenes/entities/EquipmentMgr.gd" type="Script" id=9]
 [ext_resource path="res://assets/scripts/game_state/HitscanRaycast.gd" type="Script" id=10]
 
-
 [sub_resource type="CapsuleShape" id=1]
-height = 1.80005
+radius = 0.5
+height = 0.9
 
 [sub_resource type="CapsuleMesh" id=2]
-mid_height = 2.0
+mid_height = 0.9
 
 [node name="ent_player" type="KinematicBody"]
 collision_layer = 2
@@ -25,7 +25,7 @@ gravity = Vector3( 0, -9.81, 0 )
 _stateManager = NodePath("StateManager")
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.90539, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.951977, 0 )
 shape = SubResource( 1 )
 
 [node name="IdleState" type="Node" parent="."]
@@ -103,7 +103,7 @@ mesh = SubResource( 2 )
 material/0 = null
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.318, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0 )
 current = true
 script = ExtResource( 6 )
 _body = NodePath("..")
