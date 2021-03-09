@@ -135,7 +135,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Btime"
-run/main_scene="res://assets/scenes/maps/test_scene01.tscn"
+run/main_scene="res://assets/scenes/maps/test_scene02.tscn"
 config/icon="res://icon.png"
 
 [autoload]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/scripts/tool/ToolMgr.gd" type="Script" id=1]
 [ext_resource path="res://assets/scripts/ent_player/ent_player.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/scenes/viewmodels/tool_smg.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/scenes/entities/EquipmentMgr.gd" type="Script" id=9]
 [ext_resource path="res://assets/scripts/game_state/HitscanRaycast.gd" type="Script" id=10]
+[ext_resource path="res://assets/scripts/ent_player/states/JumpState.gd" type="Script" id=11]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -37,12 +38,14 @@ _inventory = NodePath("../inventory")
 _toolMgr = NodePath("../Camera/ToolMgr")
 stateMove = "move"
 stateRun = "run"
+stateJump = "jump"
 actionL = "plr_moveL"
 actionR = "plr_moveR"
 actionF = "plr_moveF"
 actionB = "plr_moveB"
 actionRun = "plr_run"
 actionJump = "plr_jump"
+_downcast = NodePath("../Downcast")
 
 [node name="MoveState" type="Node" parent="."]
 script = ExtResource( 4 )
@@ -56,10 +59,8 @@ actionL = "plr_moveL"
 actionR = "plr_moveR"
 actionF = "plr_moveF"
 actionB = "plr_moveB"
-actionJump = "plr_jump"
-movementLRSpeed = 50.0
-movementFBSpeed = 50.0
-jumpStrength = 40.0
+movementLRSpeed = 40.0
+movementFBSpeed = 40.0
 stateIdle = "idle"
 
 [node name="RunState" type="Node" parent="."]
@@ -74,20 +75,31 @@ actionL = "plr_moveL"
 actionR = "plr_moveR"
 actionF = "plr_moveF"
 actionB = "plr_moveB"
-actionJump = "plr_jump"
-movementLRSpeed = 150.0
-movementFBSpeed = 150.0
-jumpStrength = 20.0
+movementLRSpeed = 70.0
+movementFBSpeed = 70.0
 stateIdle = "idle"
 
 [node name="StateManager" type="Node" parent="."]
 script = ExtResource( 5 )
 stateRegister = {
 "idle": NodePath("../IdleState"),
+"jump": NodePath("../JumpState"),
 "move": NodePath("../MoveState"),
 "run": NodePath("../RunState")
 }
 defaultState = "idle"
+
+[node name="JumpState" type="Node" parent="."]
+script = ExtResource( 11 )
+stateIdentifier = "jump"
+_stateManager = NodePath("../StateManager")
+_player = NodePath("..")
+_inventory = NodePath("../inventory")
+_toolMgr = NodePath("../Camera/ToolMgr")
+jumpPower = 0.2
+jumpControlDuration = 0.3
+idleState = "idle"
+actionJump = "plr_jump"
 
 [node name="inventory" type="Node" parent="."]
 script = ExtResource( 7 )
@@ -119,4 +131,9 @@ _raycast = NodePath("../../HitscanRaycast")
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 enabled = true
 script = ExtResource( 10 )
+
+[node name="Downcast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.1, 0 )
 [connection signal="velocityChanged" from="." to="MoveState" method="sigVelocityChanged"]
