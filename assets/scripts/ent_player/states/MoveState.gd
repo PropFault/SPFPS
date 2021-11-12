@@ -11,6 +11,7 @@ export(float) var movementLRSpeed;
 export(float) var movementFBSpeed;
 export(float)var minVelocity = 0.1;
 export(String) var stateIdle;
+
 var movement:Vector3 = Vector3()
 
 func _process(delta):
@@ -24,12 +25,12 @@ func _process(delta):
 		#	self.player.velocity.y + movement.y * delta * jumpStrength, 
 			#	self.player.velocity.z * friction + movement.z * delta * movementFBSpeed);
 		var newV = self.player.velocity;
-		newV += self.player.transform.basis.x * movement.x * delta * movementLRSpeed;
-		newV += self.player.transform.basis.z * movement.z * delta * movementFBSpeed;
-		newV *= friction;
+		newV += self.player.transform.basis.x * movement.x * movementLRSpeed * delta;
+		newV += self.player.transform.basis.z * movement.z * movementFBSpeed * delta;
+		newV /= (1 + (friction * friction)*delta);
 		
-		self.player.velocity = Vector3(newV.x * friction, self.player.velocity.y, newV.z *friction)
+		self.player.velocity = Vector3(newV.x, self.player.velocity.y, newV.z)
 
 func sigVelocityChanged(velocity):
-	if velocity.length() < minVelocity:
+	if self.stateEnabled and velocity.length() < minVelocity:
 		self.stateManager.changeState(stateIdle);

@@ -15,5 +15,6 @@ func _ready():
 	pass
 	
 func _physics_process(delta):
+	print(self.velocity)
 	self.velocity = self.move_and_slide(self.velocity,Vector3(0,1,0))
 	self.velocity +=gravity*delta

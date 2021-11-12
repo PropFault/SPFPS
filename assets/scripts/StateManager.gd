@@ -15,6 +15,8 @@ func changeState(var stateName):
 		if activeState.stateIdentifier == stateName:
 			return
 		activeState.onStateDisabled();
+		print(get_stack())
+		print("Active State: " + activeState.stateIdentifier + " -> " + stateName)
 	activeState = self.getState(stateName);
 	activeState.onStateEnabled();
 
