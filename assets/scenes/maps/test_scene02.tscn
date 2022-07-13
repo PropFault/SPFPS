@@ -1,12 +1,17 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/materials/mapping/prototyping/grids/grid_1x1_grey.tres" type="Material" id=1]
 [ext_resource path="res://assets/scenes/entities/ent_player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/materials/mapping/prototyping/grids/grid_1x1_orange.tres" type="Material" id=3]
 [ext_resource path="res://assets/scenes/debuggers/StateMachineDebugger.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/scripts/debug/SpeedDisplay.gd" type="Script" id=5]
+[ext_resource path="res://assets/scenes/entities/w_vending_machine.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/scenes/entities/ent_can.tscn" type="PackedScene" id=7]
 
 [node name="test_scene02" type="Spatial"]
+
+[node name="ent_can" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.82172, -4.63092, -3.62245 )
 
 [node name="room1" type="CSGBox" parent="."]
 use_collision = true
@@ -68,3 +73,6 @@ __meta__ = {
 target = NodePath("../ent_player")
 
 [node name="StateMachineDebugger" parent="." instance=ExtResource( 4 )]
+
+[node name="w_vending_machine" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.3803, -4.59641, -4.5334 )

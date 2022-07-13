@@ -20,7 +20,7 @@ func _process(delta):
 		if self.stateEnabled:
 			timer+= delta
 			print(timer)
-	if self.player.is_on_floor() and self.stateEnabled:
+	if player._isGrounded() and self.stateEnabled:
 		self.stateManager.changeState(self.stateIdle);
 
 

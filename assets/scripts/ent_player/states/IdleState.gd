@@ -13,12 +13,10 @@ export(String) var actionJump;
 export(NodePath) var _downcast;
 onready var downcast = get_node(_downcast)
 
-func _isGrounded():
-	return player.is_on_floor() or downcast.is_colliding()
 
 func _process(delta):
 	var sum = Input.get_action_strength(actionL) + Input.get_action_strength(actionR) + Input.get_action_strength(actionF) +Input.get_action_strength(actionB)
-	if not _isGrounded() or Input.is_action_just_pressed("plr_jump"):
+	if not player._isGrounded() or Input.is_action_just_pressed("plr_jump"):
 		self.stateManager.changeState(stateAirborne)
 	if sum > 0:
 		if not self.stateManager.isActive(stateAirborne):
@@ -26,6 +24,8 @@ func _process(delta):
 				self.stateManager.changeState(stateRun);
 			else:
 				self.stateManager.changeState(stateMove);
+	if Input.is_key_pressed(KEY_CONTROL):
+		self.stateManager.changeState("crouch")
 	if self.stateEnabled:
 		self.player.velocity.x = 0
 		self.player.velocity.z = 0

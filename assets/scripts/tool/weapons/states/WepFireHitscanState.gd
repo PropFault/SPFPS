@@ -2,6 +2,7 @@ extends WepFireState
 class_name WepFireHitscanState
 export(PackedScene)var debug
 export(float)var hitscanRange
+export(float)var impactImpulseFac = 10
 var init = false
 func onHit(var point, var collider, var damage):
 	print("HIT ", point, " for ", damage)
@@ -10,10 +11,10 @@ func onHit(var point, var collider, var damage):
 	newball.global_transform.origin = self.owningTool.raycast.get_collision_point()
 	if collider != null:
 		if "hp" in collider:
-			collider.hp -=damage
+			collider.hp -= damage
 		if collider is RigidBody:
 			var body = collider as RigidBody
-			body.apply_impulse(self.owningTool.raycast.get_collision_point() - body.global_transform.origin, (self.owningTool.raycast.get_collision_point() - self.owningTool.raycast.global_transform.origin).normalized() * 25)
+			body.apply_impulse(self.owningTool.raycast.get_collision_point() - body.global_transform.origin, (self.owningTool.raycast.get_collision_point() - self.owningTool.raycast.global_transform.origin).normalized() * impactImpulseFac)
 
 
 func _fireProjectile(var dir):

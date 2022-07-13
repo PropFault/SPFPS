@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/models/world/can01.gltf" type="PackedScene" id=1]
+
+[sub_resource type="CylinderShape" id=1]
+radius = 1.03881
+height = 3.89869
+
+[node name="ent_can" type="RigidBody"]
+mass = 0.5
+
+[node name="can01" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.000250518, 0.029112, -0.000110716 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
+shape = SubResource( 1 )
