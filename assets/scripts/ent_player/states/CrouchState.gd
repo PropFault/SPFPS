@@ -3,8 +3,13 @@ export(float) var crouchFactor = 0.5
 func _process(delta):
 	._process(delta)
 	if self.stateEnabled:
-		self.player.scale.y = crouchFactor
-		if Input.is_key_pressed(KEY_CONTROL):
+		if not Input.is_key_pressed(KEY_CONTROL):
 			self.stateManager.changeState("idle")
-	else:
-		self.player.scale.y = 1.0
+
+func onStateEnabled():
+	.onStateEnabled()
+	self.player.scale.y = crouchFactor
+func onStateDisabled():
+	.onStateDisabled()
+	#self.player.transform.origin.y -= 0.25
+	self.player.scale.y = 1.0

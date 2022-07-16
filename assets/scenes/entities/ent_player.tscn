@@ -200,6 +200,7 @@ smoothing = 0.1
 [node name="ToolSwayEffect" type="Node" parent="Flincher"]
 script = ExtResource( 15 )
 _target = NodePath("../Camera/ToolMgr")
+_angularSource = NodePath("../Camera")
 effectMultiplier = 1.02
 
 [node name="PropShield" type="Area" parent="."]
@@ -208,6 +209,6 @@ effectMultiplier = 1.02
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0.952, 0 )
 shape = SubResource( 3 )
 [connection signal="velocityChanged" from="." to="Flincher/ToolSwayEffect" method="_on_ent_player_velocityChanged"]
-[connection signal="velocityChanged" from="." to="Flincher/SpeedFOVEffect" method="_on_ent_player_velocityChanged"]
 [connection signal="velocityChanged" from="." to="MoveState" method="sigVelocityChanged"]
+[connection signal="velocityChanged" from="." to="Flincher/SpeedFOVEffect" method="_on_ent_player_velocityChanged"]
 [connection signal="body_entered" from="PropShield" to="." method="_on_PropShield_body_entered"]
