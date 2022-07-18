@@ -36,11 +36,23 @@ gravity = Vector3( 0, -9.81, 0 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.951977, 0 )
 shape = SubResource( 1 )
 
-[node name="IdleState" type="Node" parent="."]
+[node name="StateManager" type="Node" parent="."]
+script = ExtResource( 5 )
+stateRegister = {
+"airborne": NodePath("../AirborneState"),
+"crouch": NodePath("../CrouchState"),
+"idle": NodePath("../IdleState"),
+"jump": NodePath("../JumpState"),
+"move": NodePath("../MoveState"),
+"run": NodePath("../RunState")
+}
+defaultState = "idle"
+
+[node name="IdleState" type="Node" parent="StateManager"]
 script = ExtResource( 3 )
 stateIdentifier = "idle"
-_stateManager = NodePath("../StateManager")
-_player = NodePath("..")
+_stateManager = NodePath("../GlobalStateManager")
+_player = NodePath("../../StateManager")
 _inventory = NodePath("../inventory")
 _toolMgr = NodePath("../Flincher/Camera/ToolMgr")
 stateMove = "move"
@@ -54,11 +66,11 @@ actionRun = "plr_run"
 actionJump = "plr_jump"
 _downcast = NodePath("../Downcast")
 
-[node name="MoveState" type="Node" parent="."]
+[node name="MoveState" type="Node" parent="StateManager"]
 script = ExtResource( 4 )
 stateIdentifier = "move"
-_stateManager = NodePath("../StateManager")
-_player = NodePath("..")
+_stateManager = NodePath("../GlobalStateManager")
+_player = NodePath("../../StateManager")
 _inventory = NodePath("../inventory")
 _toolMgr = NodePath("../Flincher/Camera/ToolMgr")
 friction = 3.0
@@ -70,11 +82,11 @@ movementLRSpeed = 30.0
 movementFBSpeed = 30.0
 stateIdle = "idle"
 
-[node name="RunState" type="Node" parent="."]
+[node name="RunState" type="Node" parent="StateManager"]
 script = ExtResource( 4 )
 stateIdentifier = "run"
-_stateManager = NodePath("../StateManager")
-_player = NodePath("..")
+_stateManager = NodePath("../GlobalStateManager")
+_player = NodePath("../../StateManager")
 _inventory = NodePath("../inventory")
 _toolMgr = NodePath("../Flincher/Camera/ToolMgr")
 friction = 3.0
@@ -86,23 +98,11 @@ movementLRSpeed = 50.0
 movementFBSpeed = 50.0
 stateIdle = "idle"
 
-[node name="StateManager" type="Node" parent="."]
-script = ExtResource( 5 )
-stateRegister = {
-"airborne": NodePath("../AirborneState"),
-"crouch": NodePath("../CrouchState"),
-"idle": NodePath("../IdleState"),
-"jump": NodePath("../JumpState"),
-"move": NodePath("../MoveState"),
-"run": NodePath("../RunState")
-}
-defaultState = "idle"
-
-[node name="AirborneState" type="Node" parent="."]
+[node name="AirborneState" type="Node" parent="StateManager"]
 script = ExtResource( 11 )
 stateIdentifier = "airborne"
-_stateManager = NodePath("../StateManager")
-_player = NodePath("..")
+_stateManager = NodePath("../GlobalStateManager")
+_player = NodePath("../../StateManager")
 _inventory = NodePath("../inventory")
 _toolMgr = NodePath("../Flincher/Camera/ToolMgr")
 friction = 0.5
@@ -209,6 +209,6 @@ effectMultiplier = 1.02
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0.952, 0 )
 shape = SubResource( 3 )
 [connection signal="velocityChanged" from="." to="Flincher/ToolSwayEffect" method="_on_ent_player_velocityChanged"]
-[connection signal="velocityChanged" from="." to="MoveState" method="sigVelocityChanged"]
+[connection signal="velocityChanged" from="." to="StateManager/MoveState" method="sigVelocityChanged"]
 [connection signal="velocityChanged" from="." to="Flincher/SpeedFOVEffect" method="_on_ent_player_velocityChanged"]
 [connection signal="body_entered" from="PropShield" to="." method="_on_PropShield_body_entered"]
