@@ -1,5 +1,6 @@
-extends MoveState
+extends Decorator
 export(float) var crouchFactor = 0.5
+onready
 func _process(delta):
 	._process(delta)
 	if self.stateEnabled:

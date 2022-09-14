@@ -1,4 +1,5 @@
 extends MoveState
+class_name AirborneState
 export(float)var jumpPower;
 export(float)var jumpControlDuration;
 export(String)var actionJump;

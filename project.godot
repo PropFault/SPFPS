@@ -9,10 +9,20 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "MoveState",
+"class": "AirborneState",
+"language": "GDScript",
+"path": "res://assets/scripts/ent_player/states/AirborneState.gd"
+}, {
 "base": "Node",
 "class": "AmmoManager",
 "language": "GDScript",
 "path": "res://assets/scripts/tool/weapons/AmmoManager.gd"
+}, {
+"base": "State",
+"class": "Decorator",
+"language": "GDScript",
+"path": "res://assets/scripts/Decorator.gd"
 }, {
 "base": "KinematicBody",
 "class": "EntPlayer",
@@ -110,7 +120,9 @@ _global_script_classes=[ {
 "path": "res://assets/scripts/tool/weapons/states/WepReloadClipState.gd"
 } ]
 _global_script_class_icons={
+"AirborneState": "",
 "AmmoManager": "",
+"Decorator": "",
 "EntPlayer": "",
 "GameInfo": "",
 "HitscanRaycast": "",
@@ -1244,6 +1256,11 @@ reload={
 plr_run={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"unicode":0,"echo":false,"script":null)
+ ]
+}
+plr_crouch={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777238,"unicode":0,"echo":false,"script":null)
  ]
 }
 
