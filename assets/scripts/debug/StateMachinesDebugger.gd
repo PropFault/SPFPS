@@ -17,7 +17,7 @@ func _ready():
 	initStateMachines(self.get_tree().root.get_children())
 
 
-func _process(delta):
+func _process(_delta):
 	self.text = ""
 	for machine in stateMachines:
 		self.text+= "Name: " + machine.name;

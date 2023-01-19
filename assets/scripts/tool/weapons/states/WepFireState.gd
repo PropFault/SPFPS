@@ -5,7 +5,7 @@ export(String) var idleState;
 export(String)var animSpeedProperty;
 export(float)var fireAnimLength;
 export(bool) var fullAuto = false;
-export(float)var RPS = 10
+export(float)var RPS = 10.0
 export(String)var animPropFirePrimary
 export(float)var spread = 0.3
 var firePattern:Dictionary

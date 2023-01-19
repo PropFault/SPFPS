@@ -1,7 +1,7 @@
 extends KinematicBody
 class_name EntPlayer
 export(Vector3)var gravity;
-export(float) var weight = 70;
+export(float) var weight = 70.0;
 onready var mass = weight / gravity.length()
 var velocity:Vector3 setget setVelocity, getVelocity;
 signal velocityChanged(velocity)

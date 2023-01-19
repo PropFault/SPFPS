@@ -2,7 +2,7 @@ extends WepFireState
 class_name WepFireHitscanState
 export(PackedScene)var debug
 export(float)var hitscanRange
-export(float)var impactImpulseFac = 10
+export(float)var impactImpulseFac = 10.0
 var init = false
 func onHit(var point, var collider, var damage):
 	print("HIT ", point, " for ", damage)

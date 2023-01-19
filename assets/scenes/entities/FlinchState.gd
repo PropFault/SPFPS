@@ -1,7 +1,7 @@
 extends State
-export(float) var kick = 5
+export(float) var kick = 5.0
 export(float) var maxOvershoot = 0.1
-export(float) var reboundTime = 2
+export(float) var reboundTime = 2.0
 export(NodePath) var _flincher
 onready var flincher = get_node(_flincher)
 var x = 0.0

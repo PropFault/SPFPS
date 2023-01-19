@@ -33,7 +33,7 @@ func addKeyframe(var kf):
 	if lowestNewTick > kf.tick:
 		lowestNewTick = kf.tick
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not tick == null:
 		if lowestNewTick < tick:
 			for i in range(indexLastEmitted, timeline.size()):

@@ -1,11 +1,11 @@
 extends RigidBody
 export(NodePath)var _animator
 onready var animator = get_node(_animator)
-export(float) var hp  = 100 setget setHP, getHP
+export(float) var hp  = 100.0 setget setHP, getHP
 onready var canSpawn = get_node("CanSpawn")
 export(String, FILE, "*.tscn") var _can
 onready var can = load(_can)
-export(float) var throwingForce = 10
+export(float) var throwingForce = 10.0
 func setHP(nhp):
 	if(nhp < hp and can != null):
 		var i = can.instance()
