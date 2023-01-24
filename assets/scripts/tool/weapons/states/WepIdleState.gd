@@ -1,7 +1,7 @@
 extends WeaponState
 class_name WepIdleState
-export (String)var pFireState
-export (String)var reloadState
+export (NodePath)var pFireState
+export (NodePath)var reloadState
 var initialRun = true
 func onStateEnabled():
 	.onStateEnabled()

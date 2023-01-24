@@ -1,24 +1,21 @@
 extends Node
 class_name StateManager
-export(Dictionary)var stateRegister;
-export(String)var defaultState;
 var activeState;
 
-func _ready():
-	self.changeState(defaultState);
-
-func getState(var stateName):
-	return get_node(stateRegister[stateName]);
-
-func changeState(var stateName):
+func changeState(var statePath):
+	var state = self.get_parent().get_node(statePath);
 	if activeState != null:
-		if activeState.stateIdentifier == stateName:
+		if activeState == state:
 			return
 		activeState.onStateDisabled();
 		print(get_stack())
-		print("Active State: " + activeState.stateIdentifier + " -> " + stateName)
-	activeState = self.getState(stateName);
+		print("Active State: " + activeState.stateIdentifier + " -> " + state.stateIdentifier)
+	activeState = state;
 	activeState.onStateEnabled();
 
-func isActive(var stateName):
-	return activeState != null and activeState.stateIdentifier == stateName
+func _process(delta):
+	if activeState!= null:
+		activeState.stateProcessing(delta)
+
+func isActive(var statePath):
+	return activeState != null and activeState == get_node(statePath)

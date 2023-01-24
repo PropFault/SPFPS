@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://assets/scripts/tool/ToolMgr.gd" type="Script" id=1]
 [ext_resource path="res://assets/scripts/ent_player/ent_player.gd" type="Script" id=2]
@@ -11,10 +11,9 @@
 [ext_resource path="res://assets/scenes/entities/EquipmentMgr.gd" type="Script" id=9]
 [ext_resource path="res://assets/scripts/game_state/HitscanRaycast.gd" type="Script" id=10]
 [ext_resource path="res://assets/scripts/ent_player/states/AirborneState.gd" type="Script" id=11]
-[ext_resource path="res://assets/scenes/entities/FlinchState.gd" type="Script" id=12]
-[ext_resource path="res://assets/scenes/entities/MonitorState.gd" type="Script" id=13]
 [ext_resource path="res://assets/scripts/fx/SpeedFOVEffect.gd" type="Script" id=14]
 [ext_resource path="res://assets/scripts/fx/ToolSwayEffect.gd" type="Script" id=15]
+[ext_resource path="res://assets/scripts/ent_player/PlayerStateController.gd" type="Script" id=16]
 [ext_resource path="res://assets/scripts/ent_player/player_manifest.gd" type="Script" id=17]
 
 [sub_resource type="CapsuleShape" id=1]
@@ -27,39 +26,115 @@ mid_height = 0.9
 [sub_resource type="CapsuleShape" id=3]
 radius = 0.54
 
+[sub_resource type="Animation" id=9]
+resource_name = "Airborne"
+length = 0.01
+tracks/0/type = "method"
+tracks/0/path = NodePath("StateManager")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ NodePath("StateManager/AirborneState") ],
+"method": "changeState"
+} ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Idle"
+length = 0.01
+tracks/0/type = "method"
+tracks/0/path = NodePath("StateManager")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ NodePath("StateManager/IdleState") ],
+"method": "changeState"
+} ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Run"
+length = 0.01
+tracks/0/type = "method"
+tracks/0/path = NodePath("StateManager")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ NodePath("StateManager/RunState") ],
+"method": "changeState"
+} ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "Airborne"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachine" id=5]
+states/Airborne/node = SubResource( 10 )
+states/Airborne/position = Vector2( 606, 38 )
+states/Idle/node = SubResource( 8 )
+states/Idle/position = Vector2( 298, 101 )
+states/Run/node = SubResource( 11 )
+states/Run/position = Vector2( 370, 219 )
+transitions = [ "Idle", "Airborne", SubResource( 12 ), "Airborne", "Idle", SubResource( 13 ), "Idle", "Run", SubResource( 14 ), "Run", "Idle", SubResource( 15 ) ]
+start_node = "Idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=6]
+
 [node name="ent_player" type="KinematicBody"]
 collision_layer = 2
 script = ExtResource( 2 )
 gravity = Vector3( 0, -9.81, 0 )
+actionL = "plr_moveL"
+actionR = "plr_moveR"
+actionF = "plr_moveF"
+actionB = "plr_moveB"
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.951977, 0 )
 shape = SubResource( 1 )
 
+[node name="Manifest" type="Node" parent="."]
+script = ExtResource( 17 )
+_player = NodePath("..")
+_inventory = NodePath("../inventory")
+_tool_mgr = NodePath("../Flincher/Camera/ToolMgr")
+
 [node name="StateManager" type="Node" parent="."]
 script = ExtResource( 5 )
-stateRegister = {
-"airborne": NodePath("AirborneState"),
-"crouch": NodePath("../CrouchState"),
-"idle": NodePath("IdleState"),
-"jump": NodePath("AirborneState"),
-"move": NodePath(""),
-"run": NodePath("RunState")
-}
-defaultState = "idle"
 
 [node name="IdleState" type="Node" parent="StateManager"]
 script = ExtResource( 3 )
-stateMove = "move"
-stateRun = "run"
-stateAirborne = "airborne"
-actionL = "plr_moveL"
-actionR = "plr_moveR"
-actionF = "plr_moveF"
-actionB = "plr_moveB"
-actionRun = "plr_run"
-actionJump = "plr_jump"
-_player = NodePath("../..")
+_stateManager = NodePath("..")
+_player_manifest = NodePath("../../Manifest")
 
 [node name="RunState" type="Node" parent="StateManager"]
 script = ExtResource( 4 )
@@ -73,8 +148,6 @@ actionF = "plr_moveF"
 actionB = "plr_moveB"
 movementLRSpeed = 50.0
 movementFBSpeed = 50.0
-stateIdle = "idle"
-_player = NodePath("../..")
 
 [node name="AirborneState" type="Node" parent="StateManager"]
 script = ExtResource( 11 )
@@ -88,8 +161,6 @@ actionF = "plr_moveF"
 actionB = "plr_moveB"
 movementLRSpeed = 1.0
 movementFBSpeed = 1.0
-stateIdle = "idle"
-_player = NodePath("../..")
 jumpPower = 0.5
 jumpControlDuration = 0.3
 actionJump = "plr_jump"
@@ -113,25 +184,6 @@ mesh = SubResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0 )
 enabled = true
 cast_to = Vector3( 0, -0.2, 0 )
-
-[node name="StateManagerEffects" type="Node" parent="."]
-script = ExtResource( 5 )
-stateRegister = {
-"flinch": NodePath("FlinchState"),
-"idle": NodePath("MonitorState")
-}
-defaultState = "idle"
-
-[node name="FlinchState" type="Node" parent="StateManagerEffects"]
-script = ExtResource( 12 )
-stateIdentifier = "flinch"
-_stateManager = NodePath("..")
-_flincher = NodePath("../../Flincher")
-
-[node name="MonitorState" type="Node" parent="StateManagerEffects"]
-script = ExtResource( 13 )
-stateIdentifier = "idle"
-_stateManager = NodePath("..")
 
 [node name="Flincher" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0 )
@@ -172,10 +224,23 @@ effectMultiplier = 1.02
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0.952, 0 )
 shape = SubResource( 3 )
 
-[node name="Manifest" type="Node" parent="."]
-script = ExtResource( 17 )
-_player = NodePath("..")
-_inventory = NodePath("../inventory")
-_tool_mgr = NodePath("../Flincher/Camera/ToolMgr")
+[node name="StateAnimPlayer" type="AnimationPlayer" parent="."]
+anims/Airborne = SubResource( 9 )
+anims/Idle = SubResource( 4 )
+anims/Run = SubResource( 7 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 5 )
+anim_player = NodePath("../StateAnimPlayer")
+active = true
+parameters/playback = SubResource( 6 )
+
+[node name="StateController" type="Node" parent="."]
+script = ExtResource( 16 )
+_player_manifest = NodePath("../Manifest")
+_animator = NodePath("../AnimationTree")
+idleState = "Idle"
+airborneState = "Airborne"
+runningState = "Run"
 
 [connection signal="velocityChanged" from="." to="Flincher/SpeedFOVEffect" method="_on_ent_player_velocityChanged"]

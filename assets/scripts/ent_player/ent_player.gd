@@ -39,5 +39,5 @@ func _process_collision(body, point):
 	var otherPush = ((body.linear_velocity * colNormal) * body.mass)/mass
 	self.velocity -= otherPush / mass
 	body.apply_impulse(ownV * colNormal * mass, body.global_transform.origin - point)
-func _isGrounded():
+func _is_grounded():
 	return is_on_floor() or downcast.is_colliding()

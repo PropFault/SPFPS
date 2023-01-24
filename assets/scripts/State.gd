@@ -7,5 +7,8 @@ var stateEnabled = false
 func onStateEnabled():
 	stateEnabled = true
 
+func stateProcessing(delta):
+	pass
+
 func onStateDisabled():
 	stateEnabled = false

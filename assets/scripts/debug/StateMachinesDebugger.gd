@@ -21,6 +21,9 @@ func _process(_delta):
 	self.text = ""
 	for machine in stateMachines:
 		self.text+= "Name: " + machine.name;
-		self.text+= "\tActive State: " + machine.activeState.name
+		if(machine.activeState!=null):
+			self.text+= "\tActive State: " + machine.activeState.name
+		else:
+			self.text+= "\tActive State: none"
 		self.text+="\n"
 	

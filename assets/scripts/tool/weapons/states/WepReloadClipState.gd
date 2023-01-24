@@ -1,7 +1,7 @@
 extends WeaponState
 class_name WepReloadClipState
 export(String)var reloadAnimProperty;
-export(String)var idleState
+export(NodePath)var idleState
 
 func onStateEnabled():
 	.onStateEnabled()

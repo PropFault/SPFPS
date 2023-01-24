@@ -1,7 +1,7 @@
 extends WeaponState
 class_name WepFireState
 export(Texture)var primaryFirePattern
-export(String) var idleState;
+export(NodePath) var idleState;
 export(String)var animSpeedProperty;
 export(float)var fireAnimLength;
 export(bool) var fullAuto = false;
