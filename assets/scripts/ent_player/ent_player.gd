@@ -1,8 +1,16 @@
 extends KinematicBody
 class_name EntPlayer
 export(Vector3)var gravity;
-export(float) var weight = 70.0;
+export(String) var actionL;
+export(String) var actionR;
+export(String) var actionF;
+export(String) var actionB;
+export(String) var actionRun;
+export(String) var actionJump;
+export(String) var actionCrouch;
+export(float) var weight = 70;
 onready var mass = weight / gravity.length()
+onready var properties = get_node("properties")
 var velocity:Vector3 setget setVelocity, getVelocity;
 signal velocityChanged(velocity)
 onready var downcast = get_node("Downcast")

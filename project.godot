@@ -9,10 +9,20 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "MoveState",
+"class": "AirborneState",
+"language": "GDScript",
+"path": "res://assets/scripts/ent_player/states/AirborneState.gd"
+}, {
 "base": "Node",
 "class": "AmmoManager",
 "language": "GDScript",
 "path": "res://assets/scripts/tool/weapons/AmmoManager.gd"
+}, {
+"base": "State",
+"class": "Decorator",
+"language": "GDScript",
+"path": "res://assets/scripts/Decorator.gd"
 }, {
 "base": "KinematicBody",
 "class": "EntPlayer",
@@ -110,7 +120,9 @@ _global_script_classes=[ {
 "path": "res://assets/scripts/tool/weapons/states/WepReloadClipState.gd"
 } ]
 _global_script_class_icons={
+"AirborneState": "",
 "AmmoManager": "",
+"Decorator": "",
 "EntPlayer": "",
 "GameInfo": "",
 "HitscanRaycast": "",
