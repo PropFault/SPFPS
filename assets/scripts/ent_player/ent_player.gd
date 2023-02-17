@@ -10,11 +10,11 @@ export(String) var actionJump;
 export(String) var actionCrouch;
 export(float) var weight = 70;
 onready var mass = weight / gravity.length()
-onready var properties = get_node("properties")
 var velocity:Vector3 setget setVelocity, getVelocity;
 signal velocityChanged(velocity)
 onready var downcast = get_node("Downcast")
 onready var propShield = get_node("PropShield")
+
 func setVelocity(var newV):
 	velocity = newV;
 	emit_signal("velocityChanged",newV);

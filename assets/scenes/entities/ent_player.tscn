@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://assets/scripts/tool/ToolMgr.gd" type="Script" id=1]
 [ext_resource path="res://assets/scripts/ent_player/ent_player.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/scenes/entities/EquipmentMgr.gd" type="Script" id=9]
 [ext_resource path="res://assets/scripts/game_state/HitscanRaycast.gd" type="Script" id=10]
 [ext_resource path="res://assets/scripts/ent_player/states/AirborneState.gd" type="Script" id=11]
+[ext_resource path="res://assets/scripts/ent_player/states/CrouchDecorator.gd" type="Script" id=12]
 [ext_resource path="res://assets/scripts/fx/SpeedFOVEffect.gd" type="Script" id=14]
 [ext_resource path="res://assets/scripts/fx/ToolSwayEffect.gd" type="Script" id=15]
 [ext_resource path="res://assets/scripts/ent_player/PlayerStateController.gd" type="Script" id=16]
@@ -19,12 +20,6 @@
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
 height = 0.9
-
-[sub_resource type="CapsuleMesh" id=2]
-mid_height = 0.9
-
-[sub_resource type="CapsuleShape" id=3]
-radius = 0.54
 
 [sub_resource type="Animation" id=9]
 resource_name = "Airborne"
@@ -40,6 +35,24 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ NodePath("StateManager/AirborneState") ],
+"method": "changeState"
+} ]
+}
+
+[sub_resource type="Animation" id=26]
+resource_name = "Crouch"
+length = 0.01
+tracks/0/type = "method"
+tracks/0/path = NodePath("StateManager")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ NodePath("StateManager/CrouchIdle") ],
 "method": "changeState"
 } ]
 }
@@ -80,6 +93,24 @@ tracks/0/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=16]
+resource_name = "Walk"
+length = 0.01
+tracks/0/type = "method"
+tracks/0/path = NodePath("StateManager")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ NodePath("StateManager/WalkState") ],
+"method": "changeState"
+} ]
+}
+
 [sub_resource type="AnimationNodeAnimation" id=10]
 animation = "Airborne"
 
@@ -89,6 +120,9 @@ animation = "Idle"
 [sub_resource type="AnimationNodeAnimation" id=11]
 animation = "Run"
 
+[sub_resource type="AnimationNodeAnimation" id=17]
+animation = "Walk"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=12]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=13]
@@ -97,17 +131,41 @@ animation = "Run"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=15]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+
 [sub_resource type="AnimationNodeStateMachine" id=5]
 states/Airborne/node = SubResource( 10 )
-states/Airborne/position = Vector2( 606, 38 )
+states/Airborne/position = Vector2( 569, 101 )
 states/Idle/node = SubResource( 8 )
 states/Idle/position = Vector2( 298, 101 )
 states/Run/node = SubResource( 11 )
-states/Run/position = Vector2( 370, 219 )
-transitions = [ "Idle", "Airborne", SubResource( 12 ), "Airborne", "Idle", SubResource( 13 ), "Idle", "Run", SubResource( 14 ), "Run", "Idle", SubResource( 15 ) ]
+states/Run/position = Vector2( 298, 277 )
+states/Walk/node = SubResource( 17 )
+states/Walk/position = Vector2( 569, 277 )
+transitions = [ "Idle", "Airborne", SubResource( 12 ), "Airborne", "Idle", SubResource( 13 ), "Idle", "Run", SubResource( 14 ), "Run", "Idle", SubResource( 15 ), "Run", "Walk", SubResource( 18 ), "Walk", "Run", SubResource( 19 ), "Idle", "Walk", SubResource( 20 ), "Walk", "Idle", SubResource( 21 ), "Walk", "Airborne", SubResource( 22 ), "Airborne", "Walk", SubResource( 23 ), "Airborne", "Run", SubResource( 24 ), "Run", "Airborne", SubResource( 25 ) ]
 start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=6]
+
+[sub_resource type="CapsuleMesh" id=2]
+mid_height = 0.9
+
+[sub_resource type="CapsuleShape" id=3]
+radius = 0.54
 
 [node name="ent_player" type="KinematicBody"]
 collision_layer = 2
@@ -117,6 +175,8 @@ actionL = "plr_moveL"
 actionR = "plr_moveR"
 actionF = "plr_moveF"
 actionB = "plr_moveB"
+actionRun = "plr_run"
+actionJump = "plr_jump"
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.951977, 0 )
@@ -146,6 +206,19 @@ actionL = "plr_moveL"
 actionR = "plr_moveR"
 actionF = "plr_moveF"
 actionB = "plr_moveB"
+movementLRSpeed = 80.0
+movementFBSpeed = 80.0
+
+[node name="WalkState" type="Node" parent="StateManager"]
+script = ExtResource( 4 )
+stateIdentifier = "walk"
+_stateManager = NodePath("..")
+_player_manifest = NodePath("../../Manifest")
+friction = 3.0
+actionL = "plr_moveL"
+actionR = "plr_moveR"
+actionF = "plr_moveF"
+actionB = "plr_moveB"
 movementLRSpeed = 50.0
 movementFBSpeed = 50.0
 
@@ -161,9 +234,51 @@ actionF = "plr_moveF"
 actionB = "plr_moveB"
 movementLRSpeed = 1.0
 movementFBSpeed = 1.0
-jumpPower = 0.5
+jumpPower = 2.0
 jumpControlDuration = 0.3
+jumpControllLossMultiplier = 10.0
 actionJump = "plr_jump"
+
+[node name="StateAnimPlayer" type="AnimationPlayer" parent="StateManager"]
+root_node = NodePath("../..")
+anims/Airborne = SubResource( 9 )
+anims/Crouch = SubResource( 26 )
+anims/Idle = SubResource( 4 )
+anims/Run = SubResource( 7 )
+anims/Walk = SubResource( 16 )
+
+[node name="AnimationTree" type="AnimationTree" parent="StateManager"]
+tree_root = SubResource( 5 )
+anim_player = NodePath("../StateAnimPlayer")
+active = true
+parameters/playback = SubResource( 6 )
+
+[node name="StateController" type="Node" parent="StateManager"]
+script = ExtResource( 16 )
+_player_manifest = NodePath("../../Manifest")
+_animator = NodePath("../AnimationTree")
+idleState = "Idle"
+airborneState = "Airborne"
+runningState = "Run"
+walkingState = "Walk"
+_airborneStateNode = NodePath("../AirborneState")
+
+[node name="CrouchIdle" type="Node" parent="StateManager"]
+script = ExtResource( 12 )
+stateIdentifier = "crouchIdle"
+_stateManager = NodePath("..")
+_player_manifest = NodePath("../../Manifest")
+_wrappedState = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="StateManager/CrouchIdle"]
+script = ExtResource( 3 )
+stateIdentifier = "crouchIdleInner"
+_stateManager = NodePath("../..")
+_player_manifest = NodePath("../../../Manifest")
+
+[node name="CrouchAirborne" type="Node" parent="StateManager"]
+script = ExtResource( 12 )
+_wrappedState = NodePath("../AirborneState")
 
 [node name="inventory" type="Node" parent="."]
 script = ExtResource( 7 )
@@ -223,24 +338,5 @@ effectMultiplier = 1.02
 [node name="CollisionShape" type="CollisionShape" parent="PropShield"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0.952, 0 )
 shape = SubResource( 3 )
-
-[node name="StateAnimPlayer" type="AnimationPlayer" parent="."]
-anims/Airborne = SubResource( 9 )
-anims/Idle = SubResource( 4 )
-anims/Run = SubResource( 7 )
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 5 )
-anim_player = NodePath("../StateAnimPlayer")
-active = true
-parameters/playback = SubResource( 6 )
-
-[node name="StateController" type="Node" parent="."]
-script = ExtResource( 16 )
-_player_manifest = NodePath("../Manifest")
-_animator = NodePath("../AnimationTree")
-idleState = "Idle"
-airborneState = "Airborne"
-runningState = "Run"
 
 [connection signal="velocityChanged" from="." to="Flincher/SpeedFOVEffect" method="_on_ent_player_velocityChanged"]
