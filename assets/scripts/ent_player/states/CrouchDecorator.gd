@@ -1,16 +1,16 @@
 extends Decorator
-export(float) var crouchFactor = 0.5
-onready
+@export var crouchFactor: float = 0.5
+
 func _process(delta):
-	._process(delta)
+	super._process(delta)
 	if self.stateEnabled:
-		if not Input.is_key_pressed(KEY_CONTROL):
+		if not Input.is_key_pressed(KEY_CTRL):
 			self.stateManager.changeState("idle")
 
 func onStateEnabled():
-	.onStateEnabled()
+	super.onStateEnabled()
 	self.player.scale.y = crouchFactor
 func onStateDisabled():
-	.onStateDisabled()
+	super.onStateDisabled()
 	#self.player.transform.origin.y -= 0.25
 	self.player.scale.y = 1.0

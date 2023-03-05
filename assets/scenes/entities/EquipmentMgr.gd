@@ -1,18 +1,20 @@
 extends Node
-export(NodePath)var _inventory;
-onready var inventory = get_node(_inventory);
+@export var inventory: Inventory
 var equipment;
+
+func _ready():
+	self.child_entered_tree.connect(child_added)
+	self.child_exiting_tree.connect(child_removed)
 
 
 func add_equipment(node):
 	print("Adding equipment ",  node.name)
 
-func add_child(node, legible_unique_name=false):
-	.add_child(node, legible_unique_name)
+func child_added(node):
 	add_equipment(node)
 
 func remove_equipment(node):
 	print("Removing equipment ", node.name)
 
-func remove_child(node):
-	.remove_child(node)
+func child_removed(node):
+	remove_equipment(node)

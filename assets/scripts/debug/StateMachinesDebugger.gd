@@ -6,7 +6,7 @@ var stateMachines : Array
 # var a = 2
 # var b = "text"
 
-func initStateMachines(var arr):
+func initStateMachines(arr):
 	for machine in arr:
 		if machine.get_children().size() > 0:
 			initStateMachines(machine.get_children())

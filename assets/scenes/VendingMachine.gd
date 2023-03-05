@@ -1,14 +1,13 @@
-extends RigidBody
-export(NodePath)var _animator
-onready var animator = get_node(_animator)
-export(float) var hp  = 100.0 setget setHP, getHP
-onready var canSpawn = get_node("CanSpawn")
-export(String, FILE, "*.tscn") var _can
-onready var can = load(_can)
-export(float) var throwingForce = 10.0
+extends RigidBody3D
+
+@export var animator: AnimationPlayer
+@export var hp: float  = 100.0 : get = getHP, set = setHP
+@export var canSpawn: Node3D
+@export var can: PackedScene
+@export var throwingForce: float = 10.0
 func setHP(nhp):
 	if(nhp < hp and can != null):
-		var i = can.instance()
+		var i = can.instantiate()
 		i.global_transform.origin = (canSpawn.global_transform.origin)
 		i.apply_central_impulse (canSpawn.global_transform.basis.z * throwingForce)
 		get_tree().get_root().add_child(i)

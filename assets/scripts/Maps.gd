@@ -2,10 +2,8 @@ extends Node
 class_name MapManager
 var maps:Dictionary;
 func _populate_maps(path):
-
-	var dir = Directory.new()
-	dir.open(path)
-	dir.list_dir_begin()
+	var dir = DirAccess.open(path)
+	dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 
 	while true:
 		var file = dir.get_next()
@@ -20,5 +18,5 @@ func _ready():
 	_populate_maps("res://assets/scenes/maps")
 	print(maps)
 
-func loadMap(var mapSpecifier):
-	get_tree().change_scene(maps.get(mapSpecifier))
+func loadMap(mapSpecifier):
+	get_tree().change_scene_to_file(maps.get(mapSpecifier))

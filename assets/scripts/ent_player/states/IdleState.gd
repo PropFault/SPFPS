@@ -1,18 +1,18 @@
 extends PlayerState
 class_name IdleState
-export(float)var idleVelocity;
-export(String)var stateMove;
-export(String)var stateRun;
-export(String)var stateAirborne;
-export(String) var actionL;
-export(String) var actionR;
-export(String) var actionF;
-export(String) var actionB;
-export(String) var actionRun;
-export(String) var actionJump;
-export(NodePath) var _player;
-export(String)var stateCrouch;
-export(NodePath) var _downcast;
+@export var idleVelocity: float;
+@export var stateMove: String;
+@export var stateRun: String;
+@export var stateAirborne: String;
+@export var actionL: String;
+@export var actionR: String;
+@export var actionF: String;
+@export var actionB: String;
+@export var actionRun: String;
+@export var actionJump: String;
+@export var _player: NodePath;
+@export var stateCrouch: String;
+@export var _downcast: NodePath;
 
 
 
@@ -28,6 +28,6 @@ func _process(delta):
 				self.stateManager.changeState(stateMove);
 	if self.stateEnabled:
 		if(Input.is_action_just_pressed(self.player.actionCrouch)):
-			 self.stateManager.changeState(stateCrouch)
+			self.stateManager.changeState(stateCrouch)
 		self.player.velocity.x = 0
 		self.player.velocity.z = 0

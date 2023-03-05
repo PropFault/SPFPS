@@ -1,20 +1,20 @@
 extends PlayerState
 class_name MoveState
-export(float) var friction;
-export(String) var actionL;
-export(String) var actionR;
+@export var friction: float;
+@export var actionL: String;
+@export var actionR: String;
 
-export(String) var actionF;
-export(String) var actionB;
+@export var actionF: String;
+@export var actionB: String;
 
-export(float) var movementLRSpeed;
-export(float) var movementFBSpeed;
-export(float)var minVelocity = 0.1;
-export(String) var stateIdle;
+@export var movementLRSpeed: float;
+@export var movementFBSpeed: float;
+@export var minVelocity: float = 0.1;
+@export var stateIdle: String;
 
 var movement:Vector3 = Vector3()
-export(NodePath) var _player;
-onready var playerxd = get_node(_player)
+@export var _player: NodePath;
+@onready var playerxd = get_node(_player)
 func _process(delta):
 
 

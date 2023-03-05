@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/smg_pFire_test.wav-22000ff34df8a9e0f87d1bea5c073c57.sample"
+type="AudioStreamWAV"
+uid="uid://wdi64t3hhwfs"
+path="res://.godot/imported/smg_pFire_test.wav-22000ff34df8a9e0f87d1bea5c073c57.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/smg_pFire_test.wav"
-dest_files=[ "res://.import/smg_pFire_test.wav-22000ff34df8a9e0f87d1bea5c073c57.sample" ]
+dest_files=["res://.godot/imported/smg_pFire_test.wav-22000ff34df8a9e0f87d1bea5c073c57.sample"]
 
 [params]
 

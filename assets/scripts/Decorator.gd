@@ -1,10 +1,10 @@
 extends State
 class_name Decorator
 
-onready var decoratedState = get_child(0) as State
+@onready var decoratedState = get_child(0) as State
 
 func onStateEnabled():
-	.onStateEnabled()
+	super.onStateEnabled()
 
 func onStateDisabled():
-	.onStateDisabled()
+	super.onStateDisabled()

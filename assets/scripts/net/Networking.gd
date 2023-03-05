@@ -1,12 +1,11 @@
 extends Node
-export(PackedScene)var player = preload("res://assets/scenes/entities/ent_player.tscn")
-export(int)var serverPort = 4554
-export(String)var serverIP = "127.0.0.1"
-export(int)var maxPlayers = 24
-export(String)var playerName = "PlayerTest "
-export(Resource)var gameInfo;
+@export var player: PackedScene = preload("res://assets/scenes/entities/ent_player.tscn")
+@export var serverPort: int = 4554
+@export var serverIP: String = "127.0.0.1"
+@export var maxPlayers: int = 24
+@export var playerName: String = "PlayerTest "
+@export var gameInfo: Resource;
 var peer
-
 # Called when the node enters the scene tree for the first time.
 
 func startClient():
@@ -17,58 +16,58 @@ func startServer():
 	peer.create_server(serverPort, maxPlayers)
 	get_tree().network_peer = peer
 func _ready():
-	peer = NetworkedMultiplayerENet.new()
+	peer = ENetMultiplayerPeer.new()
 	if "--server" in OS.get_cmdline_args():
 		startServer()
-		Game.connect("KeyframePassed", self,"serverFwdAction")
-	get_tree().connect("network_peer_connected", self, "onPeerConnected")
-	get_tree().connect("network_peer_disconnected", self, "onPeerDisconnected")
+		Game.connect("KeyframePassed",Callable(self,"serverFwdAction"))
+	get_tree().connect("peer_connected",Callable(self,"onPeerConnected"))
+	get_tree().connect("peer_disconnected",Callable(self,"onPeerDisconnected"))
 	
-func onPeerConnected(var id):
+func onPeerConnected(id):
 	print("Peer is attempting to connect")
-	if get_tree().is_network_server():
+	if get_tree().is_server():
 		print("Requesting player info")
 		rpc_id(id, "requestPlayerInfo")
-remote func receivePlayerInfo(info):
+@rpc("any_peer") func receivePlayerInfo(info):
 	print("Player ", info, " connected")
-	info["rpc_id"] = str(get_tree().get_rpc_sender_id())
-	print("sending GI: " , to_json(gameInfo))
+	info["rpc_id"] = str(get_tree().get_remote_sender_id())
+	print("sending GI: " , JSON.new().stringify(gameInfo))
 	Maps.loadMap(gameInfo.currentMap)
 	Game.startTimeline(0);
 	var gameJSON = Game.timeline_to_json()
 	print("SENDING: ", gameJSON)
-	rpc_id(get_tree().get_rpc_sender_id(),"receiveServerInfo", gameInfo.to_json(), gameJSON)
+	rpc_id(get_tree().get_remote_sender_id(),"receiveServerInfo", gameInfo.JSON.new().stringify(), gameJSON)
 	rpc("registerNewPlayer",info)
 
 
 	
-remote func registerNewPlayer(info):
-	var newPlayer = player.instance()
+@rpc("any_peer") func registerNewPlayer(info):
+	var newPlayer = player.instantiate()
 	newPlayer.name = str(info["rpc_id"])
 	get_tree().root.add_child(newPlayer)
-remote func receiveServerInfo(infoJson, gamestate):
+@rpc("any_peer") func receiveServerInfo(infoJson, gamestate):
 	var info = GameInfo.new(infoJson)
 	Maps.loadMap(info.currentMap)
 	Game.timeline_from_json(gamestate)
 
-func syncAction(var gameAction : Game.Action):
-	rpc_id(1, "serverReceiveAction", gameAction.to_json())
+func syncAction(gameAction : Game.Action):
+	rpc_id(1, "serverReceiveAction", gameAction.JSON.new().stringify())
 
-remote func serverReceiveAction(var gameActionJSON):
+@rpc("any_peer") func serverReceiveAction(gameActionJSON):
 	var newAction = Game.Action.new(gameActionJSON)
 	Game.addKeyframe(newAction)
 
-puppet func receiveAction(var gameActionJSON):
+@rpc func receiveAction(gameActionJSON):
 	var action = Game.Action.new(gameActionJSON)
 	Game.addKeyframe(action)
 
 func serverFwdAction(action):
-	rpc("receiveAction", action.to_json())
+	rpc("receiveAction", action.JSON.new().stringify())
 
-func onPeerDisconnected(var id):
-	if not get_tree().is_network_server():
-		get_tree().root.find_node(str(id)).queue_free()
+func onPeerDisconnected(id):
+	if not get_tree().is_server():
+		get_tree().root.find_child(str(id)).queue_free()
 	print("Quitting")
 	get_tree().quit()
-remote func requestPlayerInfo():
+@rpc("any_peer") func requestPlayerInfo():
 	return rpc_id(1,"receivePlayerInfo",{ name = playerName})

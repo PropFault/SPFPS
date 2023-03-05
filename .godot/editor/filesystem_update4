@@ -1,0 +1,7 @@
+res://default_bus_layout.tres
+res://default_env.tres
+res://assets/scenes/viewmodels/tool_smg.tscn
+res://assets/animation_trees/tool_smg.tres
+res://assets/scenes/entities/ent_player.tscn
+res://assets/scenes/maps/test_scene02.tscn
+res://assets/scripts/ent_player/PlayerState.gd

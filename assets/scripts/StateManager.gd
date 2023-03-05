@@ -1,16 +1,16 @@
 extends Node
 class_name StateManager
-export(Dictionary)var stateRegister;
-export(String)var defaultState;
+@export var stateRegister: Dictionary;
+@export var defaultState: String;
 var activeState;
 
 func _ready():
 	self.changeState(defaultState);
 
-func getState(var stateName):
-	return get_node(stateRegister[stateName]);
+func getState(stateName):
+	return get_node(stateRegister[stateName]) as State;
 
-func changeState(var stateName):
+func changeState(stateName):
 	if activeState != null:
 		if activeState.stateIdentifier == stateName:
 			return
@@ -20,5 +20,5 @@ func changeState(var stateName):
 	activeState = self.getState(stateName);
 	activeState.onStateEnabled();
 
-func isActive(var stateName):
+func isActive(stateName):
 	return activeState != null and activeState.stateIdentifier == stateName

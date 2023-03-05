@@ -1,6 +1,6 @@
 extends WeaponState
 class_name WepInitState
-export(String)var idleState;
+@export var idleState: String;
 
 func animInitDone():
 	self.stateManager.changeState(idleState)
