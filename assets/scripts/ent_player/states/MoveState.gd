@@ -9,7 +9,6 @@ class_name MoveState
 
 @export var movementLRSpeed: float;
 @export var movementFBSpeed: float;
-
 var movement:Vector3 = Vector3()
 
 func stateProcessing(delta):

@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bum7b7nsgjigw"
+uid="uid://dbbsmnwfaagks"
 path="res://.godot/imported/wrld_vending_machine.gltf-e45dc96059a4ccebf4ce1b5987087346.scn"
 
 [deps]
@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/wrld_vending_machine.gltf-e45dc96059a4ccebf4c
 
 [params]
 
-nodes/root_type="Node3D"
+nodes/root_type="Spatial"
 nodes/root_name="Scene Root"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0

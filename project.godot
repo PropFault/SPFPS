@@ -1,158 +1,23 @@
-; Project was converted by built-in tool to Godot 4.0
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
 config_version=5
-_global_script_classes=[{
-"base": "MoveState",
-"class": "AirborneState",
-"language": "GDScript",
-"path": "res://assets/scripts/ent_player/states/AirborneState.gd"
-}, {
-"base": "Node",
-"class": "AmmoManager",
-"language": "GDScript",
-"path": "res://assets/scripts/tool/weapons/AmmoManager.gd"
-}, {
-"base": "PlayerState",
-"class": "CrouchDecorator",
-"language": "GDScript",
-"path": "res://assets/scripts/ent_player/states/CrouchDecorator.gd"
-}, {
-"base": "State",
-"class": "Decorator",
-"language": "GDScript",
-"path": "res://assets/scripts/Decorator.gd"
-}, {
-"base": "KinematicBody",
-"class": "EntPlayer",
-"language": "GDScript",
-"path": "res://assets/scripts/ent_player/ent_player.gd"
-}, {
-"base": "Resource",
-"class": "GameInfo",
-"language": "GDScript",
-"path": "res://assets/scripts/net/GameInfo.gd"
-}, {
-"base": "RayCast",
-"class": "HitscanRaycast",
-"language": "GDScript",
-"path": "res://assets/scripts/game_state/HitscanRaycast.gd"
-}, {
-"base": "PlayerState",
-"class": "IdleState",
-"language": "GDScript",
-"path": "res://assets/scripts/ent_player/states/IdleState.gd"
-}, {
-"base": "Node",
-"class": "Inventory",
-"language": "GDScript",
-"path": "res://assets/scripts/ent_player/Inventory.gd"
-}, {
-"base": "Node",
-"class": "MapManager",
-"language": "GDScript",
-"path": "res://assets/scripts/Maps.gd"
-}, {
-"base": "PlayerState",
-"class": "MoveState",
-"language": "GDScript",
-"path": "res://assets/scripts/ent_player/states/MoveState.gd"
-}, {
-"base": "State",
-"class": "PlayerState",
-"language": "GDScript",
-"path": "res://assets/scripts/ent_player/PlayerState.gd"
-}, {
-"base": "Node",
-"class": "State",
-"language": "GDScript",
-"path": "res://assets/scripts/State.gd"
-}, {
-"base": "Node",
-"class": "StateManager",
-"language": "GDScript",
-"path": "res://assets/scripts/StateManager.gd"
-}, {
-"base": "Spatial",
-"class": "ToolMgr",
-"language": "GDScript",
-"path": "res://assets/scripts/tool/ToolMgr.gd"
-}, {
-"base": "State",
-"class": "ToolState",
-"language": "GDScript",
-"path": "res://assets/scripts/tool/ToolState.gd"
-}, {
-"base": "Spatial",
-"class": "WeaponHitscan",
-"language": "GDScript",
-"path": "res://assets/scripts/tool/weaponHitscan.gd"
-}, {
-"base": "ToolState",
-"class": "WeaponState",
-"language": "GDScript",
-"path": "res://assets/scripts/tool/weapons/WeaponState.gd"
-}, {
-"base": "WepFireState",
-"class": "WepFireHitscanState",
-"language": "GDScript",
-"path": "res://assets/scripts/tool/weapons/states/WepFireHitscanState.gd"
-}, {
-"base": "WeaponState",
-"class": "WepFireState",
-"language": "GDScript",
-"path": "res://assets/scripts/tool/weapons/states/WepFireState.gd"
-}, {
-"base": "WeaponState",
-"class": "WepIdleState",
-"language": "GDScript",
-"path": "res://assets/scripts/tool/weapons/states/WepIdleState.gd"
-}, {
-"base": "WeaponState",
-"class": "WepInitState",
-"language": "GDScript",
-"path": "res://assets/scripts/tool/weapons/states/WepInitState.gd"
-}, {
-"base": "WeaponState",
-"class": "WepReloadClipState",
-"language": "GDScript",
-"path": "res://assets/scripts/tool/weapons/states/WepReloadClipState.gd"
-}]
-_global_script_class_icons={
-"AirborneState": "",
-"AmmoManager": "",
-"CrouchDecorator": "",
-"Decorator": "",
-"EntPlayer": "",
-"GameInfo": "",
-"HitscanRaycast": "",
-"IdleState": "",
-"Inventory": "",
-"MapManager": "",
-"MoveState": "",
-"PlayerState": "",
-"State": "",
-"StateManager": "",
-"ToolMgr": "",
-"ToolState": "",
-"WeaponHitscan": "",
-"WeaponState": "",
-"WepFireHitscanState": "",
-"WepFireState": "",
-"WepIdleState": "",
-"WepInitState": "",
-"WepReloadClipState": ""
-}
 
 [application]
 
 config/name="Btime"
 run/main_scene="res://assets/scenes/maps/test_scene02.tscn"
+config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 
 [autoload]
 
 Maps="*res://assets/scenes/MapManager.tscn"
-Networking="*res://assets/scenes/Networking.tscn"
-Game="*res://assets/scripts/game_state/Game.gd"
 
 [importer_defaults]
 
@@ -1252,11 +1117,6 @@ reload={
 ]
 }
 plr_run={
-"deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
-]
-}
-plr_crouch={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]

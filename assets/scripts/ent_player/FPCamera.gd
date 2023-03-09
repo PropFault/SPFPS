@@ -1,8 +1,8 @@
 extends Camera3D
-@export (float)var sensitivity = 0.045
-@export(float)var rotXClamp = 90.0
-@export(NodePath)var _body;
-@onready var body:Node3D = get_node(_body)
+@export_range(0.0, 10.0) var sensitivity: float = 0.045
+@export_range(-360, 360) var rotXClamp: float = 90.0
+@export var body: Node3D
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 

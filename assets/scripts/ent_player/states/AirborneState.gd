@@ -1,10 +1,10 @@
 extends MoveState
 class_name AirborneState
-@export(float)var jumpPower;
-@export(float)var jumpControlDuration;
-@export(float)var jumpControllLossMultiplier = 2.0;
-@export(String)var actionJump;
-@export(bool)var keepJumping;
+@export var jumpPower: float
+@export var jumpControlDuration:float
+@export var jumpControllLossMultiplier: float = 2.0;
+@export var actionJump: String
+@export var keepJumping: bool
 var alreadyJumped = false;
 
 var timer = 0.0

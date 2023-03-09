@@ -1,4 +1,5 @@
 extends Node
+<<<<<<< HEAD
 @export var _target: NodePath
 @export var _source: NodePath
 @export var effectMultiplier: float = 1.1
@@ -19,6 +20,16 @@ func _ready():
 	pass # Replace with function body.
 
 
+=======
+@export var effectMultiplier: float = 1.1
+@export var angularEffectMultiplier: float = 1
+@export var smoothing: float = 0.2
+@export var target: Node3D
+@export var source: Node3D
+@onready var baseOrigin = target.transform.origin
+var trailingVal = Vector3(0,0,0)
+@onready var lastOrigin = source.global_transform.origin
+>>>>>>> master
 
 func _process(delta):
 	var originDelta = source.global_transform.origin - target.global_transform.origin
@@ -32,5 +43,3 @@ func _process(delta):
 	target.transform.origin = baseOrigin - add 
 	print(add)
 	lastOrigin = origin
-
-

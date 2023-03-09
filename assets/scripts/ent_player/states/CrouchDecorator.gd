@@ -1,7 +1,6 @@
 extends PlayerState
 class_name CrouchDecorator
-@export var _wrappedState: NodePath
-@onready var wrappedState = get_node(_wrappedState)
+@export var wrappedState: State
 
 func onStateEnabled():
 	super.onStateEnabled()

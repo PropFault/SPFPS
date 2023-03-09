@@ -1,9 +1,9 @@
 extends Node
 class_name AmmoManager
-@export(int)var rCapacity;
-@export(int)var rLoaded;
-@export(int)var rStashed;
-@export(bool)var reloadOnlyFull = false;
+@export var rCapacity: int
+@export var rLoaded: int
+@export var rStashed: int
+@export var reloadOnlyFull: bool = false;
 
 
 func canReload(num = -1):

@@ -1,13 +1,14 @@
 extends WeaponState
 class_name WepFireState
-@export(Texture2D)var primaryFirePattern
-@export var idleState: NodePath;
-@export(String)var animSpeedProperty;
-@export(float)var fireAnimLength;
+@export var primaryFirePattern: Texture2D
+@export var idleState: String;
+@export var animSpeedProperty: String;
+@export var fireAnimLength: float;
 @export var fullAuto: bool = false;
-@export(float)var RPS = 10.0
-@export(String)var animPropFirePrimary
-@export(float)var spread = 0.3
+@export var RPS: float = 10.0
+@export var animPropFirePrimary: String
+@export var spread: float = 0.3
+
 var firePattern:Dictionary
 var firePatternIndex = 0
 var finished = true
@@ -53,7 +54,7 @@ func fireAnimationFinished():
 
 func generateFirePattern():
 	firePattern.clear()
-	var image = primaryFirePattern.get_data()
+	var image = primaryFirePattern.get_image()
 	false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var imageSize = image.get_size()
 	var sortHelper = Array()

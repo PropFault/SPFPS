@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dj34l1yu28iin"
+uid="uid://dlv4ny1126xhl"
 path="res://.godot/imported/can01.gltf-3c7bf0379c72b460cbfda1c93753a264.scn"
 
 [deps]
@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/can01.gltf-3c7bf0379c72b460cbfda1c93753a264.s
 
 [params]
 
-nodes/root_type="Node3D"
+nodes/root_type="Spatial"
 nodes/root_name="Scene Root"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0

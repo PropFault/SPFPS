@@ -2,7 +2,7 @@
 
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
-uid="uid://xvcfsynyer1"
+uid="uid://5qy76n4xfih8"
 path="res://.godot/imported/smg_pFire_test.ogg-4b957bbade9e0ad537e80a9fe001c0a8.oggvorbisstr"
 
 [deps]
@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/smg_pFire_test.ogg-4b957bbade9e0ad537e80a9fe0
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
 bpm=0
 beat_count=0

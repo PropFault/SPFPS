@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cs1qeobsadr7u"
+uid="uid://b1bjptgce3el1"
 path="res://.godot/imported/tool_smg.gltf-f373de8461dd171f81a0d331fbc6b029.scn"
 
 [deps]
@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/tool_smg.gltf-f373de8461dd171f81a0d331fbc6b02
 
 [params]
 
-nodes/root_type="Node3D"
+nodes/root_type="Spatial"
 nodes/root_name="Scene Root"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0

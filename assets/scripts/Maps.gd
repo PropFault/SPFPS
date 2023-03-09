@@ -2,9 +2,7 @@ extends Node
 class_name MapManager
 var maps:Dictionary;
 func _populate_maps(path):
-
-	var dir = Directory.new()
-	dir.open(path)
+	var dir = DirAccess.open(path)
 	dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 
 	while true:

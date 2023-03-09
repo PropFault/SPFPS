@@ -2,13 +2,12 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxt6ytixh5is"
+uid="uid://b5ll72lv1tm4l"
 path.s3tc="res://.godot/imported/tool_smg_lower arm_1.png-7c8200460d6e32705ed1e5cdc7c1911f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={}
 
 [deps]
 

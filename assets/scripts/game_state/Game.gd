@@ -17,8 +17,6 @@ class Action:
 			self.args = json[JSON_ARGS]
 		if JSON_EXTRAS in json:
 			self.extras = json[JSON_EXTRAS]
-	func JSON.new().stringify():
-		return {JSON_TICK: self.tick, JSON_NAME: self.name, JSON_ARGS: self.args, JSON_EXTRAS: self.extras}
 var timeline:Array
 var lowestNewTick = 0
 var tick = null

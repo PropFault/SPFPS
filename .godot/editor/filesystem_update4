@@ -1,0 +1,9 @@
+res://default_bus_layout.tres
+res://default_env.tres
+res://assets/scenes/entities/ent_player.tscn
+res://assets/materials/mapping/prototyping/grids/grid_1x1_grey.tres
+res://assets/animation_trees/tool_smg.tres
+res://assets/scenes/maps/test_scene02.tscn
+res://assets/scenes/viewmodels/tool_smg.tscn
+res://assets/scripts/tool/weapons/states/WepFireState.gd
+res://assets/scripts/debug/SpeedDisplay.gd

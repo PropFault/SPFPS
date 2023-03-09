@@ -1,10 +1,18 @@
 extends RigidBody3D
+<<<<<<< HEAD
 @export(NodePath)var _animator
 @onready var animator = get_node(_animator)
 @export var hp: float  = 100.0 : get = getHP, set = setHP
 @onready var canSpawn = get_node("CanSpawn")
 @export var _can # (String, FILE, "*.tscn")
 @onready var can = load(_can)
+=======
+
+@export var animator: AnimationPlayer
+@export var hp: float  = 100.0 : get = getHP, set = setHP
+@export var canSpawn: Node3D
+@export var can: PackedScene
+>>>>>>> master
 @export var throwingForce: float = 10.0
 func setHP(nhp):
 	if(nhp < hp and can != null):

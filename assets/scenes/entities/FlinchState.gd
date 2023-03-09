@@ -2,8 +2,8 @@ extends State
 @export var kick: float = 5.0
 @export var maxOvershoot: float = 0.1
 @export var reboundTime: float = 2.0
-@export var _flincher: NodePath
-@onready var flincher = get_node(_flincher)
+@export var flincher: Node
+
 var x = 0.0
 var reachFirstZero = 2.5 * PI
 func xScale(x):

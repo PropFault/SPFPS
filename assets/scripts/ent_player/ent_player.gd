@@ -1,6 +1,6 @@
 extends CharacterBody3D
 class_name EntPlayer
-@export(Vector3)var gravity;
+@export var gravity: Vector3;
 @export var actionL: String;
 @export var actionR: String;
 @export var actionF: String;
@@ -9,11 +9,11 @@ class_name EntPlayer
 @export var actionJump: String;
 @export var actionCrouch: String;
 @export var weight: float = 70;
+@export var downcast: RayCast3D
+@export var propShield: Area3D
 @onready var mass = weight / gravity.length()
-var velocity:Vector3 : get = getVelocity, set = setVelocity;
 signal velocityChanged(velocity)
-@onready var downcast = get_node("Downcast")
-@onready var propShield = get_node("PropShield")
+
 
 func setVelocity(newV):
 	velocity = newV;
@@ -35,7 +35,8 @@ func _physics_process(delta):
 	for body in propShield.get_overlapping_bodies():
 		if body is RigidBody3D:
 			var space_state = get_world_3d().direct_space_state
-			var cast = space_state.intersect_ray(self.global_transform.origin, body.global_transform.origin)
+			var ray = PhysicsRayQueryParameters3D.create(self.global_transform.origin, body.global_transform.origin)
+			var cast = space_state.intersect_ray(ray)
 			if cast:
 				_process_collision(body, cast.position)
 	self.velocity +=gravity*delta
@@ -46,5 +47,6 @@ func _process_collision(body, point):
 	var otherPush = ((body.linear_velocity * colNormal) * body.mass)/mass
 	self.velocity -= otherPush / mass
 	body.apply_impulse(body.global_transform.origin - point, ownV * colNormal * mass)
+
 func _is_grounded():
 	return is_on_floor() or downcast.is_colliding()
