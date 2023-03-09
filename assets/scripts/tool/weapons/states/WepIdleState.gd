@@ -1,10 +1,10 @@
 extends WeaponState
 class_name WepIdleState
-export (NodePath)var pFireState
-export (NodePath)var reloadState
+@export (NodePath)var pFireState
+@export (NodePath)var reloadState
 var initialRun = true
 func onStateEnabled():
-	.onStateEnabled()
+	super.onStateEnabled()
 	initialRun = true
 func _process(_delta):
 	if self.stateEnabled:

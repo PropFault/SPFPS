@@ -1,25 +1,25 @@
-extends Spatial
+extends Node3D
 class_name WeaponHitscan
-export(float)var primaryRPS = 10
-export(Texture)var primaryFirePattern
-export(int)var primaryAmmoStash = 60
-export(int)var primaryAmmoClip = 30
-export(int)var primaryClipSize = 30
-export(int)var primaryPelletCount = 1
-export(NodePath)var _animationTree;
-export(String)var animationPropertyReload;
-export(String)var animationPropertyFire;
-export(String)var animationPropertyTimeScale
-export(String)var animationPropertyReloadDone
-export(String)var animationPropertyGunEmpty
-export(String)var animationPropertyReloadCancel
-export(float)var fireAnimLength;
-export(NodePath)var _raycast;
-export(PackedScene)var debug;
-export(float)var spread = 0.3
-export(AudioStreamSample)var pFireEffect
+@export(float)var primaryRPS = 10
+@export(Texture2D)var primaryFirePattern
+@export(int)var primaryAmmoStash = 60
+@export(int)var primaryAmmoClip = 30
+@export(int)var primaryClipSize = 30
+@export(int)var primaryPelletCount = 1
+@export(NodePath)var _animationTree;
+@export(String)var animationPropertyReload;
+@export(String)var animationPropertyFire;
+@export(String)var animationPropertyTimeScale
+@export(String)var animationPropertyReloadDone
+@export(String)var animationPropertyGunEmpty
+@export(String)var animationPropertyReloadCancel
+@export(float)var fireAnimLength;
+@export(NodePath)var _raycast;
+@export(PackedScene)var debug;
+@export(float)var spread = 0.3
+@export(AudioStreamWAV)var pFireEffect
 
-onready var raycast:RayCast = get_node(_raycast)
+@onready var raycast:RayCast3D = get_node(_raycast)
 var animationTree;
 var firePattern:Dictionary
 var firePatternIndex = 0
@@ -33,7 +33,7 @@ var freeAudioStreams:Array
 func generateFirePattern():
 	firePattern.clear()
 	var image = primaryFirePattern.get_data()
-	image.lock()
+	false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var imageSize = image.get_size()
 	var sortHelper = Array()
 	var tempDic = Dictionary()
@@ -67,12 +67,12 @@ func spendBullet():
 	return false
 func canFire():
 	return self.primaryAmmoClip > 0 and fireDone and reloadDone and gunReady
-func castBullet(var direction, var length):
-	print("CASTING TO ", direction, " * ", length, " = ", raycast.cast_to)
-	raycast.cast_to = direction * length
+func castBullet(direction, length):
+	print("CASTING TO ", direction, " * ", length, " = ", raycast.target_position)
+	raycast.target_position = direction * length
 	raycast.force_raycast_update()
 	hitpoints.push_back(raycast.get_collision_point())
-	var newball = debug.instance();
+	var newball = debug.instantiate();
 	get_tree().current_scene.add_child(newball);
 	newball.global_transform.origin = raycast.get_collision_point()
 func fireBullet():
@@ -139,7 +139,7 @@ func _process(delta):
 func fireAnimDrawFinished():
 	gunReady = true
 
-func playSFX(var sfx):
+func playSFX(sfx):
 	if audioStreamPool.size() <=0:
 		#populate pool
 		for i in range(0,20):
@@ -147,7 +147,7 @@ func playSFX(var sfx):
 			add_child(player)
 			player.global_transform.origin = self.global_transform.origin
 			player.bus = "weapons"
-			player.connect("finished", self, "repopulateFreeAudioList")
+			player.connect("finished",Callable(self,"repopulateFreeAudioList"))
 			audioStreamPool.push_back(player);
 			repopulateFreeAudioList()
 	if freeAudioStreams.size()>0:

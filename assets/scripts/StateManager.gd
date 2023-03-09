@@ -2,7 +2,7 @@ extends Node
 class_name StateManager
 var activeState;
 
-func changeState(var statePath):
+func changeState(statePath):
 	var state = self.get_parent().get_node(statePath);
 	if activeState != null:
 		if activeState == state:
@@ -17,5 +17,5 @@ func _process(delta):
 	if activeState!= null:
 		activeState.stateProcessing(delta)
 
-func isActive(var statePath):
+func isActive(statePath):
 	return activeState != null and activeState == get_node(statePath)

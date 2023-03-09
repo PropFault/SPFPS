@@ -1,15 +1,15 @@
 extends MoveState
 class_name AirborneState
-export(float)var jumpPower;
-export(float)var jumpControlDuration;
-export(float)var jumpControllLossMultiplier = 2.0;
-export(String)var actionJump;
-export(bool)var keepJumping;
+@export(float)var jumpPower;
+@export(float)var jumpControlDuration;
+@export(float)var jumpControllLossMultiplier = 2.0;
+@export(String)var actionJump;
+@export(bool)var keepJumping;
 var alreadyJumped = false;
 
 var timer = 0.0
 func onStateEnabled():
-	.onStateEnabled()
+	super.onStateEnabled()
 	timer = 0.0
 
 func _process(delta):
@@ -17,7 +17,7 @@ func _process(delta):
 		alreadyJumped = false
 	
 func stateProcessing(delta):
-	.stateProcessing(delta)
+	super.stateProcessing(delta)
 	print("TIMER: ", timer)
 	var canJump = timer < jumpControlDuration and not alreadyJumped
 	if Input.is_action_pressed(actionJump):
@@ -32,6 +32,6 @@ func stateProcessing(delta):
 
 
 func onStateDisabled():
-	.onStateDisabled()
+	super.onStateDisabled()
 	timer = 0.0
 

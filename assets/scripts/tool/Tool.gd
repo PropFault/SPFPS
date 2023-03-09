@@ -1,3 +1,3 @@
 extends Node
-export(NodePath) var _raycast
-onready var raycast:HitscanRaycast = get_node(_raycast)
+@export var _raycast: NodePath
+@onready var raycast:HitscanRaycast = get_node(_raycast)

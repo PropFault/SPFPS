@@ -1,7 +1,7 @@
 extends Node
-export(NodePath) var _player
-export(NodePath) var _inventory
-export(NodePath) var _tool_mgr
+@export var _player: NodePath
+@export var _inventory: NodePath
+@export var _tool_mgr: NodePath
 
 var player
 var inventory

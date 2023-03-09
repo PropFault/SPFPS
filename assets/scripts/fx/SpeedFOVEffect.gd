@@ -1,9 +1,9 @@
 extends Node
-export(NodePath) var _camera
-export(float) var effectMultiplier = 1.1
-export(float) var smoothing = 0.2
-onready var camera = get_node(_camera)
-onready var baseFov = camera.fov
+@export var _camera: NodePath
+@export var effectMultiplier: float = 1.1
+@export var smoothing: float = 0.2
+@onready var camera = get_node(_camera)
+@onready var baseFov = camera.fov
 var trailingVal = 0.0
 var targetVal = 0.0
 # Declare member variables here. Examples:

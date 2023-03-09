@@ -1,10 +1,10 @@
 extends WeaponState
 class_name WepReloadClipState
-export(String)var reloadAnimProperty;
-export(NodePath)var idleState
+@export(String)var reloadAnimProperty;
+@export(NodePath)var idleState
 
 func onStateEnabled():
-	.onStateEnabled()
+	super.onStateEnabled()
 	if ammoManager.canReload():
 		self.animationTree[reloadAnimProperty] = true
 	else:

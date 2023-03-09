@@ -10,14 +10,14 @@ class Action:
 	const  JSON_ARGS = "args"
 	const  JSON_EXTRAS = "extras"
 	signal execute(action)
-	func _init(var json):
+	func _init(json):
 		self.tick = json[JSON_TICK]
 		self.name = json[JSON_NAME]
 		if JSON_ARGS in json:
 			self.args = json[JSON_ARGS]
 		if JSON_EXTRAS in json:
 			self.extras = json[JSON_EXTRAS]
-	func to_json():
+	func JSON.new().stringify():
 		return {JSON_TICK: self.tick, JSON_NAME: self.name, JSON_ARGS: self.args, JSON_EXTRAS: self.extras}
 var timeline:Array
 var lowestNewTick = 0
@@ -25,10 +25,10 @@ var tick = null
 var indexLastEmitted = 0
 signal KeyframePassed(action)
 
-func startTimeline(var startTick):
+func startTimeline(startTick):
 	self.tick = startTick
 
-func addKeyframe(var kf):
+func addKeyframe(kf):
 	timeline.append(kf)
 	if lowestNewTick > kf.tick:
 		lowestNewTick = kf.tick
@@ -50,7 +50,7 @@ func timeline_to_json():
 	var json = {"tick": self.tick}
 	json["actions"] = Array()
 	for frame in timeline:
-		json["actions"].append(frame.to_json())
+		json["actions"].append(frame.JSON.new().stringify())
 	return json
 
 func timeline_from_json(json):

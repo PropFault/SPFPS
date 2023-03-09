@@ -1,8 +1,8 @@
 extends Node
-export (NodePath) var _inventory
-export (NodePath) var _toolMgr
-onready var inventory = get_node(_inventory)
-onready var toolMgr:ToolMgr = get_node(_toolMgr)
+@export (NodePath) var _inventory
+@export (NodePath) var _toolMgr
+@onready var inventory = get_node(_inventory)
+@onready var toolMgr:ToolMgr = get_node(_toolMgr)
 
 
 # Declare member variables here. Examples:

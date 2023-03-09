@@ -1,13 +1,13 @@
 extends WeaponState
 class_name WepFireState
-export(Texture)var primaryFirePattern
-export(NodePath) var idleState;
-export(String)var animSpeedProperty;
-export(float)var fireAnimLength;
-export(bool) var fullAuto = false;
-export(float)var RPS = 10.0
-export(String)var animPropFirePrimary
-export(float)var spread = 0.3
+@export(Texture2D)var primaryFirePattern
+@export var idleState: NodePath;
+@export(String)var animSpeedProperty;
+@export(float)var fireAnimLength;
+@export var fullAuto: bool = false;
+@export(float)var RPS = 10.0
+@export(String)var animPropFirePrimary
+@export(float)var spread = 0.3
 var firePattern:Dictionary
 var firePatternIndex = 0
 var finished = true
@@ -16,7 +16,7 @@ func _ready():
 	generateFirePattern()
 
 func onStateEnabled():
-	.onStateEnabled()
+	super.onStateEnabled()
 	self.fire()
 	
 func fire():
@@ -40,7 +40,7 @@ func _process(delta):
 				fire()
 		timer += delta
 	
-func _fireProjectile(var direction):
+func _fireProjectile(direction):
 	pass
 func fireAnimationFinished():
 	print("FINISH CALLED")
@@ -54,7 +54,7 @@ func fireAnimationFinished():
 func generateFirePattern():
 	firePattern.clear()
 	var image = primaryFirePattern.get_data()
-	image.lock()
+	false # image.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var imageSize = image.get_size()
 	var sortHelper = Array()
 	var tempDic = Dictionary()
@@ -70,7 +70,7 @@ func generateFirePattern():
 	for elem in sortHelper:
 		firePattern[elem] = tempDic[elem];
 func onStateDisabled():
-	.onStateDisabled()
+	super.onStateDisabled()
 	finished = true
 	if fullAuto:
 		firePatternIndex = 0

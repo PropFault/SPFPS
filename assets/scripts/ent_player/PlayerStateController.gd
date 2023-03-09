@@ -1,14 +1,14 @@
 extends Node
-export(NodePath) var _player_manifest;
-export(NodePath) var _animator;
-export(String) var idleState;
-export(String) var airborneState;
-export(String) var runningState;
-export(String) var walkingState;
-export(NodePath) var _airborneStateNode;
-onready var airborneStateNode = get_node(_airborneStateNode)
-onready var player_manifest = get_node(_player_manifest);
-onready var state_machine = get_node(_animator)["parameters/playback"];
+@export var _player_manifest: NodePath;
+@export var _animator: NodePath;
+@export var idleState: String;
+@export var airborneState: String;
+@export var runningState: String;
+@export var walkingState: String;
+@export var _airborneStateNode: NodePath;
+@onready var airborneStateNode = get_node(_airborneStateNode)
+@onready var player_manifest = get_node(_player_manifest);
+@onready var state_machine = get_node(_animator)["parameters/playback"];
 
 func _process(delta):
 	var player = player_manifest.player

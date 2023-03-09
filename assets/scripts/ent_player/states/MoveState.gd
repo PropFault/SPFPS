@@ -1,14 +1,14 @@
 extends PlayerState
 class_name MoveState
-export(float) var friction;
-export(String) var actionL;
-export(String) var actionR;
+@export var friction: float;
+@export var actionL: String;
+@export var actionR: String;
 
-export(String) var actionF;
-export(String) var actionB;
+@export var actionF: String;
+@export var actionB: String;
 
-export(float) var movementLRSpeed;
-export(float) var movementFBSpeed;
+@export var movementLRSpeed: float;
+@export var movementFBSpeed: float;
 
 var movement:Vector3 = Vector3()
 

@@ -1,6 +1,6 @@
 extends Node
 class_name Inventory
-export(Array, PackedScene)var items;
+@export(Array, PackedScene)var items;
 
 
 func _ready():
@@ -8,10 +8,10 @@ func _ready():
 		item_added(child) #load existing items
 
 func add_child(node, legible_unique_name=false):
-	.add_child(node, legible_unique_name)
+	super.add_child(node, legible_unique_name)
 	item_added(node)
 
-func item_added(var nodeItem):
+func item_added(nodeItem):
 	var scene = PackedScene.new()
 	scene.pack(nodeItem)
 	items.push_back(scene)

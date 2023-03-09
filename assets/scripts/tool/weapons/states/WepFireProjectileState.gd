@@ -1,4 +1,4 @@
 extends WepFireState
 
-func _fireProjectile(var dir):
+func _fireProjectile(dir):
 	print("projectiles not implemented")

@@ -1,6 +1,6 @@
 extends State
 class_name PlayerState
-export(NodePath) var _player_manifest
+@export var _player_manifest: NodePath
 var player_manifest
 var player
 var inventory
