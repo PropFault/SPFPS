@@ -5,12 +5,12 @@ class_name CrouchDecorator
 func onStateEnabled():
 	super.onStateEnabled()
 	wrappedState.onStateEnabled()
-	player_manifest.player.transform.scale.z = 0.5
+	#player_manifest.player.transform.scale.z = 0.5
 
 func stateProcessing(delta):
 	wrappedState.stateProcessing(delta)
 
 func onStateDisabled():
 	super.onStateDisabled()
-	player_manifest.player.transform.scale.z = 1.0
+	#player_manifest.player.transform.scale.z = 1.0
 	wrappedState.onStateDisabled()
