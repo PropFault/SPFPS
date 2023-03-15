@@ -1,50 +1,56 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://dk0s25sbceh4p"]
 
-[ext_resource path="res://assets/scenes/VendingMachine.gd" type="Script" id=1]
-[ext_resource path="res://assets/models/world/vending/wrld_vending_machine.gltf" type="PackedScene" id=2]
+[ext_resource type="Script" path="res://assets/scenes/VendingMachine.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dbbsmnwfaagks" path="res://assets/models/world/vending/wrld_vending_machine.gltf" id="2"]
 
-[sub_resource type="BoxShape3D" id=1]
-size = Vector3( 1.22131, 2.11941, 1 )
+[sub_resource type="BoxShape3D" id="1"]
+size = Vector3(2.39798, 4.12153, 1.83287)
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 resource_name = "break"
 step = 0.02
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("OmniLight3D:light_energy")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.04, 0.08, 0.1, 0.14, 0.24, 0.26, 0.3, 0.66, 0.68, 0.72 ),
-"transitions": PackedFloat32Array( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.1, 0.14, 0.24, 0.26, 0.3, 0.66, 0.68, 0.72),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [ 8.0, 0.0, 0.0, 8.0, 0.0, 0.0, 8.0, 0.0, 0.0, 8.0, 0.0 ]
+"values": [8.0, 0.0, 0.0, 8.0, 0.0, 0.0, 8.0, 0.0, 0.0, 8.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lsjwa"]
+_data = {
+"break": SubResource("2")
 }
 
 [node name="w_vending_machine" type="RigidBody3D"]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.53745, 0 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.53745, 0)
 mass = 51.0204
-script = ExtResource( 1 )
+script = ExtResource("1")
 _animator = NodePath("AnimationPlayer")
 hp = 30.0
 _can = "res://assets/scenes/entities/ent_can.tscn"
 
-[node name="wrld_vending_machine" parent="." instance=ExtResource( 2 )]
-transform = Transform3D( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.02004, 0 )
+[node name="wrld_vending_machine" parent="." instance=ExtResource("2")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.02004, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15042, 0 )
-shape = SubResource( 1 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15042, 0)
+shape = SubResource("1")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.173104, 2.87697, 0.670463 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.173104, 2.87697, 0.670463)
 light_energy = 8.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "break"
-playback_speed = 0.0
-anims/break = SubResource( 2 )
+libraries = {
+"": SubResource("AnimationLibrary_lsjwa")
+}
 
 [node name="CanSpawn" type="Node3D" parent="."]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.536317, 1.32762 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.536317, 1.32762)

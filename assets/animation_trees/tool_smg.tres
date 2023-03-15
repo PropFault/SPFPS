@@ -18,15 +18,19 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="6"]
 switch_mode = 2
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="7"]
 xfade_time = 0.05
 switch_mode = 2
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="8"]
+advance_mode = 2
 advance_condition = &"Rel"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="9"]
+advance_mode = 2
 advance_condition = &"pFire"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="10"]
@@ -46,4 +50,4 @@ states/weapon_fire1/position = Vector2(539, 65)
 states/weapon_reload/node = SubResource("4")
 states/weapon_reload/position = Vector2(323, 202)
 transitions = ["weapon_draw", "idle", SubResource("5"), "weapon_reload", "idle", SubResource("6"), "weapon_fire1", "idle", SubResource("7"), "idle", "weapon_reload", SubResource("8"), "idle", "weapon_fire1", SubResource("9"), "weapon_reload", "weapon_fire1", SubResource("10"), "Start", "weapon_draw", SubResource("AnimationNodeStateMachineTransition_oo0wd")]
-graph_offset = Vector2(-131, 22)
+graph_offset = Vector2(-88, -43)

@@ -33,7 +33,7 @@ _subresources={
 "idle": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
-"save_to_file/path": "",
+"save_to_file/path": "res://assets/models/viewmodels/smg/idle.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -1832,7 +1832,7 @@ _subresources={
 "ref": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
-"save_to_file/path": "",
+"save_to_file/path": "res://assets/models/viewmodels/smg/ref.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -3631,7 +3631,7 @@ _subresources={
 "weapon_draw": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
-"save_to_file/path": "",
+"save_to_file/path": "res://assets/models/viewmodels/smg/weapon_draw.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -5430,7 +5430,7 @@ _subresources={
 "weapon_fire1": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
-"save_to_file/path": "",
+"save_to_file/path": "res://assets/models/viewmodels/smg/weapon_fire1.tres",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -7229,7 +7229,7 @@ _subresources={
 "weapon_fire1_reset": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
-"save_to_file/path": "",
+"save_to_file/path": "res://assets/models/viewmodels/smg/weapon_fire1_reset.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -9028,7 +9028,7 @@ _subresources={
 "weapon_fire2": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
-"save_to_file/path": "",
+"save_to_file/path": "res://assets/models/viewmodels/smg/weapon_fire2.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -10827,7 +10827,7 @@ _subresources={
 "weapon_holster": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
-"save_to_file/path": "",
+"save_to_file/path": "res://assets/models/viewmodels/smg/weapon_holster.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -12626,7 +12626,7 @@ _subresources={
 "weapon_reload": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
-"save_to_file/path": "",
+"save_to_file/path": "res://assets/models/viewmodels/smg/weapon_reload.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,

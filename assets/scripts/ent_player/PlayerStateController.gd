@@ -16,7 +16,6 @@ func _process(delta):
 		var sum = Input.get_action_strength(player.actionL) + Input.get_action_strength(player.actionR) + Input.get_action_strength(player.actionF) +Input.get_action_strength(player.actionB)
 		print(sum)
 		if(player.velocity.length_squared() < 0.1 && sum < 0.01):
-			print("idleState")
 			state_machine.travel(idleState);
 		else:
 			if(Input.is_action_pressed("plr_run")):

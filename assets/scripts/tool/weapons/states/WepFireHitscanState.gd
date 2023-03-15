@@ -3,6 +3,9 @@ class_name WepFireHitscanState
 @export var debug: PackedScene
 @export var hitscanRange: float
 @export var impactImpulseFac: float = 10.0
+@onready var owningTool = manifest.owningTool #compatibility with legacy code
+@onready var ammoManager: AmmoManager = manifest.ammoManager #compatibility with legacy code
+@onready var animationTree = manifest.animationTree #compatibility with legacy code
 
 var init = false
 func onHit(point, collider, damage):

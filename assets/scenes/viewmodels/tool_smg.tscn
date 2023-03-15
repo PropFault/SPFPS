@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://assets/scripts/tool/weapons/states/WepInitState.gd" id="2"]
 [ext_resource type="Script" path="res://assets/scripts/tool/Tool.gd" id="2_av717"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://ds0l2vgwap055" path="res://assets/animation_trees/tool_smg.tres" id="3"]
+[ext_resource type="AnimationLibrary" uid="uid://cxxgm0v5nnjh5" path="res://assets/models/viewmodels/smg/root.res" id="3_rnlyq"]
 [ext_resource type="PackedScene" path="res://assets/scenes/debug_ball.tscn" id="4"]
 [ext_resource type="Script" path="res://assets/scripts/tool/weapons/states/WepIdleState.gd" id="5"]
 [ext_resource type="Script" path="res://assets/scripts/tool/weapons/AmmoManager.gd" id="6"]
@@ -11,13 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://b6nau0bu864yv" path="res://assets/textures/spray_patterns/test_pattern.png" id="9"]
 [ext_resource type="Script" path="res://assets/scripts/tool/weapons/states/WepFireHitscanState.gd" id="10"]
 [ext_resource type="Script" path="res://assets/scripts/tool/weapons/states/WepReloadClipState.gd" id="11"]
-[ext_resource type="Script" path="res://assets/scripts/tool/weapons/tool_smg_controller.gd" id="11_od24c"]
 [ext_resource type="Script" path="res://assets/scripts/tool/weapons/WeaponManifest.gd" id="13_xot0l"]
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_1j0w8"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_232ky"]
-graph_offset = Vector2(-244, 81)
 nodes/AnimationNodeStateMachine/node = ExtResource("3")
 nodes/AnimationNodeStateMachine/position = Vector2(-160, 120)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_1j0w8")
@@ -191,6 +190,11 @@ transform = Transform3D(-0.966221, 0.230471, 0.115322, 0.140783, 0.0972198, 0.98
 [node name="Bone" parent="metarig" index="7"]
 transform = Transform3D(0.991841, -0.0750442, 0.103054, -0.103785, -0.00589869, 0.994582, -0.0740298, -0.997163, -0.013639, -0.320216, 1.42507, 0.793676)
 
+[node name="AnimationPlayer" parent="." index="1"]
+libraries = {
+"": ExtResource("3_rnlyq")
+}
+
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeBlendTree_232ky")
 anim_player = NodePath("../AnimationPlayer")
@@ -203,24 +207,27 @@ parameters/TimeScale/scale = 1.0
 [node name="StateManager" type="Node" parent="." index="3"]
 script = ExtResource("7")
 
-[node name="WepInitState" type="Node" parent="StateManager" index="0" node_paths=PackedStringArray("manifest", "stateManager")]
+[node name="WepInitState" type="Node" parent="StateManager" index="0" node_paths=PackedStringArray("idleState", "manifest", "stateManager")]
 script = ExtResource("2")
+idleState = NodePath("../WepIdleState")
 manifest = NodePath("../../Manifest")
 stateIdentifier = "Init"
 stateManager = NodePath("..")
 
-[node name="WepIdleState" type="Node" parent="StateManager" index="1" node_paths=PackedStringArray("manifest", "stateManager")]
+[node name="WepIdleState" type="Node" parent="StateManager" index="1" node_paths=PackedStringArray("pFireState", "reloadState", "manifest", "stateManager")]
 script = ExtResource("5")
+pFireState = NodePath("../WepFireHitscanState")
+reloadState = NodePath("../WepReloadClipState")
 manifest = NodePath("../../Manifest")
 stateIdentifier = "Idle"
 stateManager = NodePath("..")
 
-[node name="WepFireHitscanState" type="Node" parent="StateManager" index="2" node_paths=PackedStringArray("manifest", "stateManager")]
+[node name="WepFireHitscanState" type="Node" parent="StateManager" index="2" node_paths=PackedStringArray("idleState", "manifest", "stateManager")]
 script = ExtResource("10")
 debug = ExtResource("4")
 hitscanRange = 400.0
 primaryFirePattern = ExtResource("9")
-idleState = "Idle"
+idleState = NodePath("../WepIdleState")
 animSpeedProperty = "parameters/TimeScale/scale"
 fireAnimLength = 0.083
 fullAuto = true
@@ -230,16 +237,13 @@ manifest = NodePath("../../Manifest")
 stateIdentifier = "Fire"
 stateManager = NodePath("..")
 
-[node name="WepReloadClipState" type="Node" parent="StateManager" index="3" node_paths=PackedStringArray("stateManager")]
+[node name="WepReloadClipState" type="Node" parent="StateManager" index="3" node_paths=PackedStringArray("idleState", "manifest", "stateManager")]
 script = ExtResource("11")
+reloadAnimProperty = "parameters/AnimationNodeStateMachine/conditions/Rel"
+idleState = NodePath("../WepIdleState")
+manifest = NodePath("../../Manifest")
 stateIdentifier = "Reload"
 stateManager = NodePath("..")
-
-[node name="StateController" type="Node" parent="StateManager" index="4" node_paths=PackedStringArray("animationTree")]
-script = ExtResource("11_od24c")
-animationTree = NodePath("../../AnimationTree")
-fireProp = "parameters/AnimationNodeStateMachine/conditions/pFire"
-reloadProp = "parameters/AnimationNodeStateMachine/conditions/Rel"
 
 [node name="AmmoManager" type="Node" parent="." index="4"]
 script = ExtResource("6")

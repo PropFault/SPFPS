@@ -29,24 +29,26 @@ func _physics_process(delta):
 	self.set_floor_stop_on_slope_enabled(false)
 	self.set_max_slides(4)
 	self.set_floor_max_angle(0.785398)
-	# TODOConverter40 infinite_inertia were removed in Godot 4.0 - previous value `true`
 	self.move_and_slide()
+	for i in range(0, self.get_slide_collision_count()):
+		var col = self.get_slide_collision(i)
+		if col.get_collider() is RigidBody3D:
+			_process_collision(col.get_collider(),col.get_collider_velocity(),col.get_normal(),col.get_position())
 	self.velocity = self.velocity
-	for body in propShield.get_overlapping_bodies():
-		if body is RigidBody3D:
-			var space_state = get_world_3d().direct_space_state
-			var ray = PhysicsRayQueryParameters3D.create(self.global_transform.origin, body.global_transform.origin)
-			var cast = space_state.intersect_ray(ray)
-			if cast:
-				_process_collision(body, cast.position)
+	#for body in propShield.get_overlapping_bodies():
+	#	if body is RigidBody3D:
+	#		var space_state = get_world_3d().direct_space_state
+	#		var ray = PhysicsRayQueryParameters3D.create(self.global_transform.origin, body.global_transform.origin)
+	#		var cast = space_state.intersect_ray(ray)
+	#		if cast:
+	#			_process_collision(body, cast.position, delta)
 	self.velocity +=gravity*delta
 
-func _process_collision(body, point):
+func _process_collision(body, colVelo, colNormal, point):
 	var ownV = self.velocity
-	var colNormal = (self.global_transform.origin - point).normalized()
-	var otherPush = ((body.linear_velocity * colNormal) * body.mass)/mass
-	self.velocity -= otherPush / mass
-	body.apply_impulse(body.global_transform.origin - point, ownV * colNormal * mass)
+	var otherPush = ((colVelo * colNormal) * body.mass)/mass
+	self.velocity -= otherPush
+	body.apply_impulse(ownV * -colNormal * mass, point)
 
 func _is_grounded():
 	return is_on_floor() or downcast.is_colliding()

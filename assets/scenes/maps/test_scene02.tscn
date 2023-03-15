@@ -4,13 +4,14 @@
 [ext_resource type="Material" path="res://assets/materials/mapping/prototyping/grids/grid_1x1_orange.tres" id="3"]
 [ext_resource type="PackedScene" path="res://assets/scenes/debuggers/StateMachineDebugger.tscn" id="4"]
 [ext_resource type="Script" path="res://assets/scripts/debug/SpeedDisplay.gd" id="5"]
-[ext_resource type="PackedScene" path="res://assets/scenes/entities/w_vending_machine.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://assets/scenes/entities/ent_can.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://dk0s25sbceh4p" path="res://assets/scenes/entities/w_vending_machine.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://btvi7gl2hwxo1" path="res://assets/scenes/entities/ent_can.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://bwpfb4kcbftdd" path="res://assets/scenes/entities/ent_player.tscn" id="7_p7qol"]
 
 [node name="test_scene02" type="Node3D"]
 
 [node name="ent_can" parent="." instance=ExtResource("7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.73807, -2.44886, 0)
 
 [node name="room1" type="CSGBox3D" parent="."]
 use_collision = true
@@ -62,7 +63,7 @@ _target = NodePath("../ent_player")
 [node name="StateMachineDebugger" parent="." instance=ExtResource("4")]
 
 [node name="w_vending_machine" parent="." instance=ExtResource("6")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.3803, -4.59641, -4.5334)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3803, -4.59641, -4.5334)
 
 [node name="ent_player" parent="." instance=ExtResource("7_p7qol")]
 
